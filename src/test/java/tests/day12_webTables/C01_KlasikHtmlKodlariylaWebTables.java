@@ -12,7 +12,7 @@ import java.util.List;
 public class C01_KlasikHtmlKodlariylaWebTables extends TestBase {
 
     @Test
-    public void test01(){
+    public void test01() {
         //1."https://testotomasyonu.com/webtables" adresine gidin
         driver.get("https://testotomasyonu.com/webtables");
         //2.Web table tum body’sini yazdirin
@@ -30,10 +30,15 @@ public class C01_KlasikHtmlKodlariylaWebTables extends TestBase {
 
         int expectedSatirSayisi = 5;
         int actualSatirSayisi = satirlarListesi.size();
-        Assert.assertEquals(expectedSatirSayisi,actualSatirSayisi);
+        Assert.assertEquals(expectedSatirSayisi, actualSatirSayisi);
         //5. Tum satirlari yazdirin
         System.out.println("=====Satirlar listesi yazdiralim=====");
         List<String> satirYazilariList = ReusableMethods.stringListeCevir(satirlarListesi);
+
+        for (WebElement each : satirlarListesi ) {
+            Assert.assertTrue("List Görünür",each.isDisplayed());
+        }
+
         System.out.println(satirYazilariList);
         //6. Web table’daki sutun sayisinin 4 olduğunu test edin
         List<WebElement> ucuncuSatirDatalarList =
@@ -41,7 +46,7 @@ public class C01_KlasikHtmlKodlariylaWebTables extends TestBase {
 
         int expectedSutunSayisi = 4;
         int actualSutunSayisi = ucuncuSatirDatalarList.size();
-        Assert.assertEquals(expectedSutunSayisi,actualSutunSayisi);
+        Assert.assertEquals(expectedSutunSayisi, actualSutunSayisi);
 
         //7. 3.sutunu yazdirin
         List<WebElement> ucuncuSutunElementleriList =
@@ -60,19 +65,19 @@ public class C01_KlasikHtmlKodlariylaWebTables extends TestBase {
         //10. 4.satirdaki category degerinin "Furniture" oldugunu test edin
 
         String expectedData = "Furniture";
-        String actualData = dataDondur(4,2);
+        String actualData = dataDondur(4, 2);
 
-        Assert.assertEquals(expectedData,actualData);
+        Assert.assertEquals(expectedData, actualData);
 
         ReusableMethods.bekle(2);
     }
 
 
-    public String dataDondur(int satirNo, int sutunNo){
+    public String dataDondur(int satirNo, int sutunNo) {
 
         //       //tbody/tr[    4     ]/td[     1   ]
 
-        String dinamikXpath = "//tbody/tr[" + satirNo + "]/td[" + sutunNo + "]" ;
+        String dinamikXpath = "//tbody/tr[" + satirNo + "]/td[" + sutunNo + "]";
 
         WebElement istenenHucreElementi = driver.findElement(By.xpath(dinamikXpath));
 
